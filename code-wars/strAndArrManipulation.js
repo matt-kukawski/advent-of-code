@@ -138,3 +138,26 @@ function validParentheses(parens){
 //     }
 //     return count == 0;
 //  }
+
+// Split Strings
+function solution(str){
+    const splitStr = str.split('');
+    let arrToReturn = [];
+    if ((splitStr.length % 2) !== 0) {
+        splitStr.push('_');
+        // console.log(splitStr);
+    }
+    for (let i=0; i < splitStr.length; i += 2) {
+        const pair = splitStr[i] + splitStr[i+1];
+        arrToReturn.push(pair);
+    }
+    // console.log(arrToReturn);
+    return arrToReturn;
+ }
+
+//  solution('abcdef')
+
+    // Best parctice
+    // function solution(str) {
+        // return (str.length % 2 ? str + '_' : str).match(/../g);
+    // }
