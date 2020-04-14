@@ -157,7 +157,32 @@ function solution(str){
 
 //  solution('abcdef')
 
-    // Best parctice
+    // Best practice
     // function solution(str) {
         // return (str.length % 2 ? str + '_' : str).match(/../g);
+    // }
+
+// Stop gninnipS My sdroW!
+// reverse letters where 5 or more letters
+function spinWords(str){
+   const wordsArr = str.split(' ');
+   const newArr = [];
+   for (let word of wordsArr) {
+       if (word.length > 4) {
+        const revWord = word.split('').reverse().join('');
+        newArr.push(revWord);
+       } else {
+        newArr.push(word);
+       }  
+   }
+   console.log('new Arr: ', newArr.join(' '));
+   return newArr.join(' ');
+}
+// spinWords("Welcome")
+
+    // Best practice
+    // function spinWords(words){
+    //     return words.split(' ').map((word) => {
+    //         return (word.length > 4) ? word.split('').reverse().join('') : word;
+    //     }).join(' ');
     // }
