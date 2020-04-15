@@ -186,3 +186,100 @@ function spinWords(str){
     //         return (word.length > 4) ? word.split('').reverse().join('') : word;
     //     }).join(' ');
     // }
+
+
+// Roman numeral converter
+function solution(number){
+    let count = number.toString();
+
+    const singles = ['I', 'IV', 'V', 'IX'];
+    const tens = ['X', 'XL', 'L', 'XC'];
+    const hundreds = ['C', 'CD', 'D', 'CM'];
+    const thousands = ['M'];
+    const digitFuncs = [singles , tens, hundreds, thousands];
+
+    const digitConverter = (digit, units) => {
+        let num = parseInt(digit);
+        let romanStr = '';
+        if (units === thousands) {
+            romanStr += units[0].repeat(num);
+        } else {
+            if (num > 0 && num < 4) {
+                romanStr += units[0].repeat(num);
+            } else if (num === 4) {
+                romanStr += units[1];
+            } else if (num >= 5 && num < 9) {
+                romanStr += units[2];
+                romanStr += units[0].repeat(num-5);
+            } else if (num === 9) {
+                romanStr += units[3];
+            }
+        }
+        // console.log(romanStr);
+        return romanStr;
+    }
+
+    const romanConstructor = (length) => {
+        // console.log('initial length:', length);
+        const romanArr = [];
+        let lengthCount = length;
+        let funcCount = 0;
+        while (lengthCount > 0) {
+            const toConvert = parseInt(count[lengthCount-1]);
+            romanArr.push(digitConverter(toConvert, digitFuncs[funcCount]));
+            lengthCount -= 1;
+            funcCount += 1;
+        };
+        // console.log('romanArr:', romanArr.reverse().join(''));
+        return romanArr.reverse().join('');
+    }
+
+    // console.log('romanConstructor: ',romanConstructor(count.length));
+    return romanConstructor(count.length);
+}
+
+// solution(1666);
+
+    // Alternatives:
+
+    // function solution(number){
+    //     // convert the number to a roman numeral
+    //   var  roman = {M:1000,CM:900, D:500,CD:400,C:100,XC:90,L:50,XL:40,X:10,IX:9,V:5,IV:4,I:1 }
+      
+    //   var ans = '';
+    //   while(number>0){
+    //       for(a in roman){ 
+    //           if(roman[a]<=number){ ans += a; number-=roman[a]; break;}
+                  
+    //       }
+    //   }
+    //   return ans;
+    // }
+
+    // using reduce
+    // function solution(number){
+    //     return [
+    //       { threshold: 1000, char: 'M'},
+    //       { threshold: 900,  char: 'CM'},
+    //       { threshold: 500,  char: 'D'},
+    //       { threshold: 400,  char: 'CD'},
+    //       { threshold: 100,  char: 'C'},
+    //       { threshold: 90,   char: 'XC'},
+    //       { threshold: 50,   char: 'L'},
+    //       { threshold: 40,   char: 'XL'},
+    //       { threshold: 10,   char: 'X'},
+    //       { threshold: 9,    char: 'IX'},
+    //       { threshold: 5,    char: 'V'},
+    //       { threshold: 4,    char: 'IV'},
+    //       { threshold: 1,    char: 'I'}
+    //     ].reduce(function(prev, curr, idx, arr)
+    //     {
+    //       while(number >= curr.threshold)
+    //       {
+    //         prev += curr.char;
+    //         number -= curr.threshold;
+    //       }
+          
+    //       return prev;
+    //     }, '');
+    // }
