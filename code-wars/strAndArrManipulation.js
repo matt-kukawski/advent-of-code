@@ -283,3 +283,21 @@ function solution(number){
     //       return prev;
     //     }, '');
     // }
+
+// Human readable time
+function humanReadable(seconds) {
+    const timeConvert = (num) => (num < 10) ? `0${num}`:`${num}`;
+    const hrRem = seconds % 3600;
+    const hr = (seconds - hrRem) / 3600;
+    const minRem = hrRem % 60;
+    const min = (hrRem - minRem) / 60;
+    return `${timeConvert(hr)}:${timeConvert(min)}:${timeConvert(minRem)}`;
+}
+// humanReadable(3693);
+    // Alternative:
+    // function humanReadable(seconds) {
+    //     var pad = function(x) { return (x < 10) ? "0"+x : x; }
+    //     return pad(parseInt(seconds / (60*60))) + ":" +
+    //            pad(parseInt(seconds / 60 % 60)) + ":" +
+    //            pad(seconds % 60)
+    // }
