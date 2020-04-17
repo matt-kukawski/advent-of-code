@@ -301,3 +301,25 @@ function humanReadable(seconds) {
     //            pad(parseInt(seconds / 60 % 60)) + ":" +
     //            pad(seconds % 60)
     // }
+
+// Find The Parity Outlier
+// return odd one out
+function findOutlier(integers){
+    const evens = [];
+    const odds = [];
+    for (let int of integers) {
+        (int % 2 === 0) ? evens.push(int) : odds.push(int);
+    }
+    return (evens.length === 1) ? evens[0] : odds[0];
+}
+
+
+// console.log(findOutlier([0,0,3,0,0]));
+// console.log(findOutlier([1,1,0,1,1]));
+
+    // Alternative:
+    function findOutlier(int){
+        var even = int.filter(a=>a%2==0);
+        var odd = int.filter(a=>a%2!==0);
+        return even.length==1? even[0] : odd[0];
+    }
