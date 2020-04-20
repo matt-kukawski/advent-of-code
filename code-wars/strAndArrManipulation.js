@@ -323,3 +323,27 @@ function findOutlier(integers){
         var odd = int.filter(a=>a%2!==0);
         return even.length==1? even[0] : odd[0];
     }
+
+function scramble(str1, str2) {
+    const str1Split = str1.split('');
+    const str2Split = str2.split('');
+    const matches = [];
+        for (let letter of str2Split) {
+            if (str1Split.indexOf(letter) !== -1) {
+                const match = str1Split.indexOf(letter);
+                matches.push(str1Split.splice(match, 1));
+                console.log(matches);
+            }
+        }
+    // matches.join('');
+    // console.log([...matches].length);
+    // console.log(
+       if (matches.length === str2Split.length) {
+           return true;
+       } else {
+           return false;
+       }
+        // );
+}
+
+scramble('rkqodlw','world');
