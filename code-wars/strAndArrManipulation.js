@@ -324,6 +324,9 @@ function findOutlier(integers){
         return even.length==1? even[0] : odd[0];
     }
 
+
+// Scramblies
+// submit later, test timeout issue with kata 
 function scramble(str1, str2) {
     const str1Split = str1.split('');
     const str2Split = str2.split('');
@@ -332,18 +335,39 @@ function scramble(str1, str2) {
             if (str1Split.indexOf(letter) !== -1) {
                 const match = str1Split.indexOf(letter);
                 matches.push(str1Split.splice(match, 1));
-                console.log(matches);
             }
         }
-    // matches.join('');
-    // console.log([...matches].length);
-    // console.log(
        if (matches.length === str2Split.length) {
            return true;
        } else {
            return false;
        }
-        // );
 }
 
-scramble('rkqodlw','world');
+    // Alternative:
+        
+
+// scramble('rkqodlw','world');
+
+// Extract the domain name from a URL
+
+function domainName(url){
+    if (url.match('www.')) {
+        return url.split('www.')[1].split('.')[0];
+    } else if (url.match('//')) {
+        return url.split('//')[1].split('.')[0];
+    } else {
+        return url.split('.')[0];
+    }
+}
+
+// domainName("http://google.com")
+// domainName("www.xakep.ru")
+
+    // Alternative:
+        // function domainName(url){
+        //     url = url.replace("https://", '');
+        //     url = url.replace("http://", '');
+        //     url = url.replace("www.", '');
+        //     return url.split('.')[0];
+        // };
