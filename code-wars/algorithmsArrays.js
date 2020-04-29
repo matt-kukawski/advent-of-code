@@ -89,22 +89,22 @@ snail = function(array) {
 
 function doneOrNot(board){
     const nums = [1,2,3,4,5,6,7,8,9];
-    const failureMsg = 'Try again';
+    const failureMsg = 'Try again!';
+    const successMsg = 'Finished!';
+    let testFailed = false;
+
     const rowCheck = (collection) => {
-        console.log('collection:', collection);
+        // console.log('collection:', collection);
         for (let row of collection) {
             for (let item of nums) {              
                 const result = row.includes(item);
-                console.log(`'item: ${item}, included: ${result}`);
-                // if (!result) return failureMsg;
+                // console.log(`'item: ${item}, included: ${result}`);
+                if (!result) return testFailed = true;
             }
         }
     }
 
     const columnChecker = () => {
-        // const columnArr = new Array(9).fill([]);
-        
-        // console.log('columnArr[0]:', columnArr[0]);
         const columnCreator = () => {
             const columnArr = [[],[],[],[],[],[],[],[],[]];
             for (let row of board) {
@@ -116,15 +116,60 @@ function doneOrNot(board){
                     arr.push(val);
                 };
             }
-            console.log('columnArr:', columnArr);
+            // console.log('columnArr:', columnArr);
             return columnArr;
         }
         const columns = columnCreator();
         rowCheck(columns);
         // console.log('columnArr:', columnArr);
     }
-    // rowCheck(board);
-    // columnChecker();
+
+    const squareArrays = () => {
+        const groupOne = [board[0], board[1], board[2]];
+        const groupTwo = [board[3], board[4], board[5]];
+        const groupThree = [board[6], board[7 ], board[8]];
+
+        const sqaureCreator = (group) => {
+            let arrOne = [];
+            let arrTwo = [];
+            let arrThree = [];
+            for (let arr of group) {
+                // console.log('arr:', arr);
+                var i,j,temparray,chunk = 3;
+                for (i=0,j=arr.length; i<j; i+=chunk) {
+                    temparray = arr.slice(i,i+chunk);
+                    // console.log('temparray:', temparray);
+                    if (i === 0) {
+                        arrOne.push(...temparray);
+                    } else if (i === 3) {
+                        arrTwo.push(...temparray);
+                    } else if (i === 6) {
+                        arrThree.push(...temparray);
+                    }
+                }
+            }
+            return [arrOne, arrTwo, arrThree];
+        }
+        // console.log('grpOne: ', sqaureCreator(groupOne));
+        const zeroToTwo = sqaureCreator(groupOne);
+        const threeToFive = sqaureCreator(groupTwo);
+        const sixToEight = sqaureCreator(groupThree);
+        return [...zeroToTwo, ...threeToFive, ...sixToEight];
+    }
+    if (testFailed === false) {
+        // console.log('rowCheck(board)');
+        rowCheck(board);
+        if (testFailed === false) {
+            // console.log('columnChecker()');
+            columnChecker();
+            if (testFailed === false) {
+                // console.log('rowCheck(squareArrays())');
+                rowCheck(squareArrays());
+            }
+        }
+        // console.log('final msg: ', testFailed ? failureMsg : successMsg);
+        return testFailed ? failureMsg : successMsg;
+    } 
 }
 
 /*
@@ -138,6 +183,7 @@ doneOrNot([[5, 3, 4, 6, 7, 8, 9, 1, 2],
     [2, 8, 7, 4, 1, 9, 6, 3, 5],
     [3, 4, 5, 2, 8, 6, 1, 7, 9]]);
 */
+/*
 doneOrNot([[5, 3, 4, 6, 7, 8, 9, 1, 2], 
     [6, 7, 2, 1, 9, 0, 3, 4, 9],
     [1, 0, 0, 3, 4, 2, 5, 6, 0],
@@ -147,3 +193,31 @@ doneOrNot([[5, 3, 4, 6, 7, 8, 9, 1, 2],
     [9, 0, 1, 5, 3, 7, 2, 1, 4],
     [2, 8, 7, 4, 1, 9, 6, 3, 5],
     [3, 0, 0, 4, 8, 1, 1, 7, 9]]);
+*/
+
+    // Alternative solutions:
+        // function doneOrNot(rows){
+
+        //     var columns = []
+        //     ,    blocks = [];
+            
+        //     for (var i = 0; i < 9; i++) {
+        //     columns[i] = [];
+            
+        //     for (var j = 0; j < 9; j++) {
+        //         var k = Math.floor(i / 3) + Math.floor(j / 3) * 3;
+        //         blocks[k] = blocks[k] || [];
+                
+        //         blocks[k].push(rows[i][j]);
+        //         columns[i].push(rows[j][i]);
+        //     }
+        //     }
+            
+        //     var is_valid_row = (row) => row.slice(0).sort((a, b) => a - b).join('') == '123456789';
+            
+        //     var is_valid = rows.every(is_valid_row) 
+        //     && columns.every(is_valid_row) 
+        //     && blocks.every(is_valid_row);
+            
+        //     return is_valid ? 'Finished!' : 'Try again!';
+        // }
