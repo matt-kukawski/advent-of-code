@@ -4,15 +4,20 @@ const arr2 = ['z','x','y','c'];
 function commonItem(arr1, arr2) {
     const myObj = {};
     for (let key of arr1) {
-        myObj[key] = true;
+        // check whether key already exists
+        if(!myObj[key]) {
+            myObj[key] = true;
+        }
     }
     // console.log('myObj:', myObj);
+
     for (let val of arr2) {
         if (myObj[val] !== undefined) {
             console.log(`${val} exists in both arrays`);
-            break;
+            return true;
         }
     }
+    return false;
 }
 
 // ALT solution
