@@ -326,28 +326,37 @@ function findOutlier(integers){
 
 
 // Scramblies
-// submit later, test timeout issue with kata 
 function scramble(str1, str2) {
-    const str1Split = str1.split('');
-    const str2Split = str2.split('');
-    const matches = [];
-        for (let letter of str2Split) {
-            if (str1Split.indexOf(letter) !== -1) {
-                const match = str1Split.indexOf(letter);
-                matches.push(str1Split.splice(match, 1));
-            }
+    dict = {};
+    for (let letter of str1) {
+        if (dict[letter] === undefined) {
+            dict[letter] = 1;
+        } else {
+            dict[letter] += 1;
         }
-       if (matches.length === str2Split.length) {
-           return true;
-       } else {
-           return false;
-       }
+        
+    }
+    // console.log('dict:', dict);
+    for (let letter of str2) {
+        if (dict[letter] !== undefined && dict[letter] > 0) {
+            dict[letter] -= 1;
+        } else {)
+            // console.log('dict:', dict);
+            return false;
+        }
+    }
+    // console.log('dict:', dict);
+    return true;
 }
 
-    // Alternative:
-        
+// scramble('cedewaraaossoqqyt', 'codewars') //==> True
 
-// scramble('rkqodlw','world');
+    // ALT scramblies
+    // function scramble(str1, str2) {
+    //     let occurences = str1.split("").reduce((arr, cur) => { arr[cur] ? arr[cur]++ : arr[cur] = 1; return arr; }, {});
+    //     return str2.split("").every((character) => --occurences[character] >= 0);
+    // }
+
 
 // Extract the domain name from a URL
 
