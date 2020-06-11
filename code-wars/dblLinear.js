@@ -6,12 +6,11 @@
 
 // u = [1, 3, 4, 7, 9, 10, 13, 15, 19, 21, 22, 27, ...]
 
-// MAKE FASTER
 function dblLinear(n) {
-    // repeat until hash table has n number of entries
     const nObj = {};
     let count = 0;
     let keyArr = [];
+
     function helper(x) {
         if (n === count) return;
         const y = 2*x+1;
@@ -27,9 +26,24 @@ function dblLinear(n) {
     }
     helper(count+1);
     returnVal = keyArr[n];
-    // console.log(nObj);
-    // create array of hash table keys
-    return parseInt(returnVal)
-
+    return parseInt(returnVal);
 }
-console.log('dblLinear(10):', dblLinear(100));
+
+// ALT
+    // function dblLinear(n) {
+    //     let finalArr = [1], x = 0, y = 0, count = 0
+    //     while (count < n) {
+    //         let nextX = 2 * finalArr[x] + 1, nextY = 3 * finalArr[y] + 1
+    //         if (nextX <= nextY) {
+    //             finalArr.push(nextX)
+    //             x++
+    //             if (nextX == nextY)
+    //                 y++
+    //         } else {
+    //             finalArr.push(nextY)
+    //             y++
+    //         }
+    //         count++;
+    //     }
+    //     return finalArr[n]
+    // }
